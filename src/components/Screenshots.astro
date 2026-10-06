@@ -1,0 +1,126 @@
+---
+import { Picture } from 'astro:assets';
+import Icon from './Icon.astro';
+
+import imgDashboard from '../assets/screenshots/dashboard-populated.png';
+import imgProfiles from '../assets/screenshots/profiles-populated.png';
+import imgModsTable from '../assets/screenshots/mods-table.png';
+import imgModsDetail from '../assets/screenshots/mods-detail-drawer.png';
+import imgIssuesDetail from '../assets/screenshots/issues-item-expanded.png';
+import imgCompare from '../assets/screenshots/compare-default.png';
+import imgCrashes from '../assets/screenshots/crashes-detail.png';
+import imgReports from '../assets/screenshots/reports-default.png';
+import imgBackup from '../assets/screenshots/backup-populated.png';
+
+export const screenshotGallery = [
+  {
+    id: 'dashboard',
+    title: 'Dashboard Overview',
+    caption: 'Pack health, mod counts, top findings and recent snapshots for the active profile.',
+    image: imgDashboard,
+    isFeature: true,
+  },
+  {
+    id: 'profiles',
+    title: 'Profiles',
+    caption: 'Each profile points to a local modpack folder and keeps its scan history.',
+    image: imgProfiles,
+  },
+  {
+    id: 'mods-table',
+    title: 'Mods Table',
+    caption: 'Searchable, filterable list of every mod with its status, ID and version.',
+    image: imgModsTable,
+  },
+  {
+    id: 'mods-detail',
+    title: 'Mod Details',
+    caption: 'Per-mod findings, dependency status and metadata in a side panel.',
+    image: imgModsDetail,
+  },
+  {
+    id: 'issues-detail',
+    title: 'Issue Evidence',
+    caption: 'Each finding expands to the file, field and raw value behind it, with a suggested fix.',
+    image: imgIssuesDetail,
+  },
+  {
+    id: 'compare',
+    title: 'Scan Comparison',
+    caption: 'Added, removed and changed mods between two scans, plus resolved and new issues.',
+    image: imgCompare,
+  },
+  {
+    id: 'crashes',
+    title: 'Crash Log Analysis',
+    caption: 'Root cause, suspect mods and findings extracted from a crash report or log.',
+    image: imgCrashes,
+  },
+  {
+    id: 'reports',
+    title: 'Reports',
+    caption: 'Diagnostic summary with recommendations, exportable as HTML or JSON.',
+    image: imgReports,
+  },
+  {
+    id: 'backup',
+    title: 'Backups',
+    caption: 'Create, verify and restore backup archives of the application data.',
+    image: imgBackup,
+  },
+];
+---
+
+<section class="section screenshots-section" id="screenshots">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">
+        <Icon name="dashboard" size={14} />
+        <span>Interface Tour</span>
+      </span>
+      <h2 class="section-title">See MMIS in Action</h2>
+      <p class="section-desc">
+        Real screenshots of the desktop app. Click any view to enlarge.
+      </p>
+    </div>
+
+    <!-- 9-item Bento Grid Layout (V9) -->
+    <div class="screenshots-bento-grid">
+      {screenshotGallery.map((item, index) => (
+        <button
+          class={`screenshot-card card reveal ${item.isFeature ? 'screenshot-bento-feature' : ''}`}
+          type="button"
+          data-gallery-trigger
+          data-index={index}
+          data-title={item.title}
+          data-caption={item.caption}
+          data-img-src={item.image.src}
+          aria-haspopup="dialog"
+          aria-label={`View enlarged ${item.title} screenshot`}
+        >
+          <span class="screenshot-thumb-wrapper">
+            <Picture
+              src={item.image}
+              formats={['avif', 'webp']}
+              widths={[480, 720, 1080]}
+              sizes={item.isFeature ? '(max-width: 900px) 100vw, 680px' : '(max-width: 600px) 100vw, (max-width: 1024px) 50vw, 340px'}
+              alt={`${item.title} - ${item.caption}`}
+              loading="lazy"
+              class="screenshot-thumb-img"
+            />
+            <span class="screenshot-overlay">
+              <span class="screenshot-zoom-badge">
+                <Icon name="search" size={16} />
+                <span>Expand</span>
+              </span>
+            </span>
+          </span>
+          <span class="screenshot-meta">
+            <span class="screenshot-title">{item.title}</span>
+            <span class="screenshot-caption">{item.caption}</span>
+          </span>
+        </button>
+      ))}
+    </div>
+  </div>
+</section>

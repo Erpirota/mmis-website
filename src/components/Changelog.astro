@@ -1,0 +1,42 @@
+---
+import { changelogData } from '../config/site';
+import Icon from './Icon.astro';
+---
+
+<section class="section changelog-section" id="changelog">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">
+        <Icon name="report" size={14} />
+        <span>Releases</span>
+      </span>
+      <h2 class="section-title">Version History</h2>
+      <p class="section-desc">
+        Release notes and development milestones for each public build.
+      </p>
+    </div>
+
+    <div class="changelog-list">
+      {changelogData.map((release) => (
+        <article class="changelog-entry card reveal">
+          <header class="changelog-header">
+            <div class="changelog-version-info">
+              <span class="badge badge-accent changelog-tag">v{release.version}</span>
+              <span class="badge changelog-channel">{release.channel}</span>
+            </div>
+            <h3 class="changelog-title">{release.title}</h3>
+          </header>
+
+          <ul class="changelog-bullets" role="list">
+            {release.bullets.map((bullet) => (
+              <li class="changelog-bullet-item">
+                <Icon name="check" size={16} class="changelog-check-icon" />
+                <span>{bullet}</span>
+              </li>
+            ))}
+          </ul>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

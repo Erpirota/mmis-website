@@ -1,0 +1,89 @@
+---
+import { siteConfig } from '../config/site';
+import Icon from './Icon.astro';
+
+// 8 groups of 8 chars for clean responsive wrapping without intra-word breaks
+const hashChunks = [];
+for (let i = 0; i < 64; i += 8) {
+  hashChunks.push(siteConfig.sha256.slice(i, i + 8));
+}
+---
+
+<section class="section download-section" id="download">
+  <div class="container">
+    <div class="download-card card reveal">
+      <div class="download-header">
+        <div class="download-badges">
+          <span class="badge badge-accent">{siteConfig.tag}</span>
+          <span class="badge">{siteConfig.channel}</span>
+          <span class="badge">Windows 10 / 11</span>
+          <span class="badge">x64</span>
+        </div>
+        <h2 class="download-title">Download {siteConfig.appName}</h2>
+        <p class="download-subtitle">
+          Portable standalone executable for 64-bit Windows. No installer, no admin elevation, and no Java/Python dependencies.
+        </p>
+      </div>
+
+      <div class="download-action-box">
+        <a href={siteConfig.downloadUrl} class="btn btn-primary download-primary-btn" id="main-download-btn">
+          <Icon name="download" size={24} />
+          <span class="download-btn-text">
+            <strong>DOWNLOAD {siteConfig.appName}</strong>
+            <small>{siteConfig.fileName} · {siteConfig.displaySize}</small>
+          </span>
+        </a>
+
+        <div class="download-links">
+          <a href={siteConfig.releaseUrl} target="_blank" rel="noopener noreferrer" class="download-text-link">
+            <span>Release notes on GitHub</span>
+            <Icon name="external_link" size={14} />
+          </a>
+          <span class="dot-sep" aria-hidden="true">·</span>
+          <a href="#changelog" class="download-text-link">Changelog</a>
+          <span class="dot-sep" aria-hidden="true">·</span>
+          <a href="#requirements" class="download-text-link">Requirements</a>
+        </div>
+      </div>
+
+      <div class="download-verify-box">
+        <div class="verify-header">
+          <span class="verify-label">SHA-256 INTEGRITY FINGERPRINT</span>
+          <span class="verify-hint">Verify your downloaded zip archive before extracting:</span>
+        </div>
+
+        <div class="hash-container">
+          <code class="hash-value" id="sha256-hash-val" aria-label={`SHA-256: ${siteConfig.sha256}`}>{hashChunks.map((chunk) => <span class="hash-chunk">{chunk}</span>)}</code>
+
+          <button
+            class="btn btn-secondary hash-copy-btn"
+            id="copy-hash-btn"
+            type="button"
+            data-hash={siteConfig.sha256}
+            aria-label="Copy SHA-256 fingerprint to clipboard"
+          >
+            <span class="copy-idle-state">
+              <Icon name="copy" size={16} />
+              <span>Copy</span>
+            </span>
+            <span class="copy-success-state" hidden>
+              <Icon name="check" size={16} />
+              <span>Copied!</span>
+            </span>
+          </button>
+        </div>
+
+        <div id="copy-status" class="sr-only" aria-live="polite"></div>
+        <p id="copy-error" class="copy-error" hidden>Could not copy automatically. Select the hash above and copy it manually.</p>
+
+        <div class="verify-cmd-box">
+          <span class="cmd-label">PowerShell verification command:</span>
+          <div class="cmd-row">
+            <code class="cmd-code">{siteConfig.verificationCommand}</code>
+          </div>
+          <span class="cmd-note">The output hash must match the 64-character SHA-256 fingerprint above.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

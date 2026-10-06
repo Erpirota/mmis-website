@@ -1,0 +1,116 @@
+---
+import '@fontsource-variable/inter';
+import '@fontsource-variable/jetbrains-mono';
+import '../styles/global.css';
+import { siteConfig } from '../config/site';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Icon from '../components/Icon.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = siteConfig.metaTitle,
+  description = siteConfig.metaDescription,
+} = Astro.props;
+
+const canonicalUrl = `${siteConfig.siteUrl}/`;
+const ogImageUrl = `${siteConfig.siteUrl}/og-image.png`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#0F1115" />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+  </head>
+  <body>
+    <div id="scroll-progress" aria-hidden="true"></div>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <Header />
+
+    <main id="main-content">
+      <slot />
+    </main>
+
+    <Footer />
+
+    <!-- Lightbox Modal (V3: structured for desktop + mobile below-image controls) -->
+    <dialog id="lightbox-dialog" aria-modal="true" aria-label="Screenshot lightbox">
+      <div class="lightbox-content">
+        <div class="lightbox-header">
+          <div class="lightbox-info">
+            <span id="lightbox-title" class="lightbox-title">Screenshot</span>
+            <span id="lightbox-counter" class="lightbox-counter">1 / 9</span>
+          </div>
+          <button id="lightbox-close" class="lightbox-close-btn" type="button" aria-label="Close screenshot preview">
+            <Icon name="close" size={20} />
+          </button>
+        </div>
+
+        <div class="lightbox-stage">
+          <button id="lightbox-prev-desktop" class="lightbox-nav-btn lightbox-prev-btn desktop-only" type="button" aria-label="Previous screenshot">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+
+          <div class="lightbox-img-wrapper">
+            <img id="lightbox-img" class="lightbox-img" src="" alt="Screenshot expanded view" width="1440" height="900" />
+          </div>
+
+          <button id="lightbox-next-desktop" class="lightbox-nav-btn lightbox-next-btn desktop-only" type="button" aria-label="Next screenshot">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+        </div>
+
+        <div class="lightbox-footer">
+          <p id="lightbox-caption" class="lightbox-caption-text"></p>
+
+          <div class="lightbox-mobile-controls mobile-only">
+            <button id="lightbox-prev-mobile" class="lightbox-nav-btn lightbox-prev-btn" type="button" aria-label="Previous screenshot">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+              <span>Prev</span>
+            </button>
+            <button id="lightbox-next-mobile" class="lightbox-nav-btn lightbox-next-btn" type="button" aria-label="Next screenshot">
+              <span>Next</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <script src="../scripts/main.ts"></script>
+  </body>
+</html>

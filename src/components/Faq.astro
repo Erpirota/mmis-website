@@ -1,0 +1,40 @@
+---
+import { faqList } from '../config/site';
+import Icon from './Icon.astro';
+---
+
+<section class="section faq-section" id="faq">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">
+        <Icon name="info" size={14} />
+        <span>Common Inquiries</span>
+      </span>
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <p class="section-desc">
+        Everything you need to know about system compatibility, offline privacy, and modpack diagnostics.
+      </p>
+    </div>
+
+    <div class="faq-accordion-list">
+      {faqList.map((faq, index) => (
+        <details class="faq-item card reveal" data-faq-index={index}>
+          <summary class="faq-summary">
+            <span class="faq-question">{faq.question}</span>
+            <span class="faq-icon-wrapper" aria-hidden="true">
+              <Icon name="chevron_down" size={18} class="faq-chevron" />
+            </span>
+          </summary>
+          <div class="faq-content">
+            <p class="faq-answer">{faq.answer}</p>
+            {faq.code && (
+              <div class="faq-code-box">
+                <code class="faq-code">{faq.code}</code>
+              </div>
+            )}
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,27 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
+---
+
+<Layout title="404 - Page Not Found" description="The requested page could not be found.">
+  <section class="section error-section">
+    <div class="container error-container">
+      <div class="error-card card">
+        <span class="badge badge-accent error-tag">
+          <Icon name="alert_circle" size={14} />
+          <span>HTTP 404</span>
+        </span>
+        <h1 class="error-title">Page Not Found</h1>
+        <p class="error-desc">
+          The requested page does not exist or has been relocated. Return to the main page to explore MMIS diagnostics and downloads.
+        </p>
+        <div class="error-actions">
+          <a href="/" class="btn btn-primary">
+            <Icon name="package" size={18} />
+            <span>Return to Homepage</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

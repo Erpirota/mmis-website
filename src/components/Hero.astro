@@ -1,0 +1,149 @@
+---
+import { Picture } from 'astro:assets';
+import { siteConfig } from '../config/site';
+import Icon from './Icon.astro';
+
+import dashboardImg from '../assets/screenshots/dashboard-populated.png';
+import modsImg from '../assets/screenshots/mods-table.png';
+import crashesImg from '../assets/screenshots/crashes-detail.png';
+import compareImg from '../assets/screenshots/compare-default.png';
+---
+
+<section class="section hero-section" id="hero">
+  <div class="container hero-container">
+    <div class="hero-content reveal">
+      <div class="hero-badges">
+        <span class="badge badge-accent">
+          <Icon name="check" size={14} />
+          <span>{siteConfig.tag}</span>
+        </span>
+        <span class="badge">{siteConfig.channel}</span>
+        <span class="badge">Windows 10 / 11</span>
+        <span class="badge">64-bit</span>
+      </div>
+
+      <h1 class="hero-headline">
+        Offline Diagnostic Workbench for Minecraft Modpacks
+      </h1>
+
+      <p class="hero-subtitle">
+        Scans local modpack folders, resolves dependencies, flags conflicts, and isolates crash root causes. 100% offline, strictly read-only, with no installers or external runtimes required.
+      </p>
+
+      <div class="hero-actions">
+        <div class="hero-buttons-row">
+          <a href={siteConfig.downloadUrl} class="btn btn-primary hero-btn-download" id="hero-download-btn">
+            <Icon name="download" size={20} />
+            <span>Download {siteConfig.appName}</span>
+          </a>
+
+          <a href="#features" class="btn btn-secondary hero-btn-learn" id="hero-learn-more-btn">
+            <span>Learn more</span>
+            <Icon name="chevron_down" size={16} />
+          </a>
+        </div>
+
+        <span class="hero-download-meta">
+          {siteConfig.tag} · Windows x64 · {siteConfig.displaySize}
+        </span>
+      </div>
+
+      <div class="hero-meta-points">
+        <span class="hero-meta-item">
+          <Icon name="check" size={14} class="meta-check" />
+          <span>Read-only safety</span>
+        </span>
+        <span class="hero-meta-item">
+          <Icon name="check" size={14} class="meta-check" />
+          <span>Zero network calls</span>
+        </span>
+        <span class="hero-meta-item">
+          <Icon name="check" size={14} class="meta-check" />
+          <span>Fabric · Forge · NeoForge · Quilt</span>
+        </span>
+      </div>
+    </div>
+
+    <!-- Windows 11 App Window Frame (V4) -->
+    <div class="hero-window-wrapper reveal">
+      <div class="app-window">
+        <!-- Windows 11 Title Bar -->
+        <div class="window-titlebar">
+          <div class="window-title-left">
+            <Icon name="package" size={16} class="win-app-icon" />
+            <span class="window-title-text">{siteConfig.appName} - {siteConfig.fullName}</span>
+          </div>
+
+          <!-- Windows 11 Caption Controls (Decorative) -->
+          <div class="window-caption-controls" aria-hidden="true">
+            <span class="win-caption-btn win-minimize">
+              <svg width="10" height="1" viewBox="0 0 10 1"><rect width="10" height="1" fill="currentColor"/></svg>
+            </span>
+            <span class="win-caption-btn win-maximize">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><rect x="0.5" y="0.5" width="9" height="9" stroke="currentColor" stroke-width="1"/></svg>
+            </span>
+            <span class="win-caption-btn win-close">
+              <svg width="10" height="10" viewBox="0 0 10 10"><line x1="1" y1="1" x2="9" y2="9" stroke="currentColor" stroke-width="1.2"/><line x1="9" y1="1" x2="1" y2="9" stroke="currentColor" stroke-width="1.2"/></svg>
+            </span>
+          </div>
+        </div>
+
+        <!-- Tab Strip Below Titlebar (V4) -->
+        <div class="window-tab-strip" role="tablist" aria-label="Hero screenshot views">
+          <button class="window-tab active" type="button" role="tab" aria-selected="true" data-hero-tab="dashboard">Dashboard</button>
+          <button class="window-tab" type="button" role="tab" aria-selected="false" data-hero-tab="mods">Mods</button>
+          <button class="window-tab" type="button" role="tab" aria-selected="false" data-hero-tab="crashes">Crash Logs</button>
+          <button class="window-tab" type="button" role="tab" aria-selected="false" data-hero-tab="compare">Compare</button>
+        </div>
+
+        <div class="window-body">
+          <div class="hero-tab-panel active" id="hero-view-dashboard">
+            <Picture
+              src={dashboardImg}
+              formats={['avif', 'webp']}
+              widths={[720, 1080, 1440]}
+              sizes="(max-width: 900px) 100vw, 1100px"
+              alt="MMIS populated dashboard displaying modpack overview, loader status, health score, and quick actions"
+              loading="eager"
+              fetchpriority="high"
+              class="hero-screenshot-img"
+            />
+          </div>
+          <div class="hero-tab-panel" id="hero-view-mods" hidden>
+            <Picture
+              src={modsImg}
+              formats={['avif', 'webp']}
+              widths={[720, 1080, 1440]}
+              sizes="(max-width: 900px) 100vw, 1100px"
+              alt="MMIS mods catalog table with dependency badges and loader filters"
+              loading="lazy"
+              class="hero-screenshot-img"
+            />
+          </div>
+          <div class="hero-tab-panel" id="hero-view-crashes" hidden>
+            <Picture
+              src={crashesImg}
+              formats={['avif', 'webp']}
+              widths={[720, 1080, 1440]}
+              sizes="(max-width: 900px) 100vw, 1100px"
+              alt="MMIS crash analysis report identifying root cause and suspect mod ranking"
+              loading="lazy"
+              class="hero-screenshot-img"
+            />
+          </div>
+          <div class="hero-tab-panel" id="hero-view-compare" hidden>
+            <Picture
+              src={compareImg}
+              formats={['avif', 'webp']}
+              widths={[720, 1080, 1440]}
+              sizes="(max-width: 900px) 100vw, 1100px"
+              alt="MMIS snapshot diff comparison between two scan runs"
+              loading="lazy"
+              class="hero-screenshot-img"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

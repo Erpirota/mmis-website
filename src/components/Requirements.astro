@@ -1,0 +1,35 @@
+---
+import { requirementsList } from '../config/site';
+import Icon from './Icon.astro';
+---
+
+<section class="section requirements-section" id="requirements">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">
+        <Icon name="info" size={14} />
+        <span>System Specifications</span>
+      </span>
+      <h2 class="section-title">What You Need</h2>
+      <p class="section-desc">
+        A 64-bit Windows PC. Nothing else to install.
+      </p>
+    </div>
+
+    <!-- 6-card 3x2 grid (V10) -->
+    <div class="requirements-grid">
+      {requirementsList.map((req) => (
+        <div class="requirement-card card reveal">
+          <div class="requirement-icon-box">
+            <Icon name={req.icon} size={22} />
+          </div>
+          <div class="requirement-body">
+            <span class="requirement-title">{req.title}</span>
+            <strong class="requirement-value">{req.value}</strong>
+            <p class="requirement-note">{req.note}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

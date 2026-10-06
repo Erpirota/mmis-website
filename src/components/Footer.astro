@@ -1,0 +1,61 @@
+---
+import { siteConfig } from '../config/site';
+import Icon from './Icon.astro';
+
+const docsUrl = `${siteConfig.repoUrl}#readme`;
+---
+
+<footer class="footer" id="footer">
+  <div class="container footer-container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <Icon name="package" size={24} class="footer-logo-icon" />
+          <span class="footer-app-name">{siteConfig.appName}</span>
+          <span class="badge footer-badge">{siteConfig.tag}</span>
+        </div>
+        <p class="footer-tagline">
+          Offline diagnostic workbench for Minecraft modpacks.
+        </p>
+      </div>
+
+      <nav class="footer-nav" aria-label="Footer Navigation">
+        <div class="footer-col">
+          <span class="footer-heading">Product</span>
+          <a href="#download" class="footer-link">Download</a>
+          <a href="#changelog" class="footer-link">Changelog</a>
+          <a href="#requirements" class="footer-link">Requirements</a>
+        </div>
+
+        <div class="footer-col">
+          <span class="footer-heading">Features</span>
+          <a href="#features" class="footer-link">Capabilities</a>
+          <a href="#screenshots" class="footer-link">Screenshots</a>
+          <a href="#how-it-works" class="footer-link">How it works</a>
+          <a href="#faq" class="footer-link">FAQ</a>
+        </div>
+
+        <div class="footer-col">
+          <span class="footer-heading">Project</span>
+          <a href={siteConfig.repoUrl} target="_blank" rel="noopener noreferrer" class="footer-link">
+            <span>GitHub</span>
+            <Icon name="external_link" size={12} />
+          </a>
+          <a href={docsUrl} target="_blank" rel="noopener noreferrer" class="footer-link">
+            <span>Documentation</span>
+            <Icon name="external_link" size={12} />
+          </a>
+        </div>
+      </nav>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-disclaimer">
+        Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.
+      </p>
+      <p class="footer-copy">
+        {siteConfig.appName} {siteConfig.tag} · Windows x64
+      </p>
+    </div>
+  </div>
+</footer>

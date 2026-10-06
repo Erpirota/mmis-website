@@ -1,0 +1,42 @@
+---
+import { howItWorksSteps } from '../config/site';
+import Icon from './Icon.astro';
+---
+
+<section class="section how-it-works-section" id="how-it-works">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">
+        <Icon name="scan" size={14} />
+        <span>Workflow</span>
+      </span>
+      <h2 class="section-title">From Download to Diagnosis</h2>
+      <p class="section-desc">
+        From download to diagnosis in five steps. No account, no installer, no network.
+      </p>
+    </div>
+
+    <div class="stepper-wrapper">
+      <div class="stepper-track" aria-hidden="true">
+        <div class="stepper-fill" id="stepper-fill"></div>
+      </div>
+
+      <div class="stepper-list">
+        {howItWorksSteps.map((item) => (
+          <div class="step-card card reveal" data-step={item.step}>
+            <div class="step-badge">
+              <span class="step-num">{item.step}</span>
+            </div>
+            <div class="step-icon-box">
+              <Icon name={item.icon} size={24} class="step-icon" />
+            </div>
+            <div class="step-content">
+              <h3 class="step-title">{item.title}</h3>
+              <p class="step-desc">{item.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
