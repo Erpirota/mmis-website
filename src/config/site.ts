@@ -57,7 +57,7 @@ const APP_VERSION = '0.1.0';
 const TAG = `v${APP_VERSION}`;
 const FILE_NAME = `MMIS-${APP_VERSION}-Windows-x64.zip`;
 const REPO_URL = `https://github.com/${GITHUB_OWNER}/${GITHUB_REPO}`;
-const SITE_URL = 'https://placeholder.domain.example';
+const SITE_URL: string = 'https://mmis-website.marhpp2009.workers.dev';
 
 export const releaseConfig: ReleaseConfig = {
   githubOwner: GITHUB_OWNER,
