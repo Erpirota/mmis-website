@@ -51,7 +51,7 @@ export interface RequirementItem {
   note: string;
 }
 
-const GITHUB_OWNER = 'OWNER';
+const GITHUB_OWNER: string = 'Erpirota';
 const GITHUB_REPO = 'MMIS';
 const APP_VERSION = '0.1.0';
 const TAG = `v${APP_VERSION}`;
